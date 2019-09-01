@@ -58,9 +58,9 @@ class Main {
         ));
         if(!empty(getenv('GOOGLE_CHROME_SHIM'))) {
             // herokuの場合
+        }
             putenv('webdriver.chrome.driver=/app/.chromedriver/bin/chromedriver');
             $options->setBinary(getenv('GOOGLE_CHROME_SHIM'));
-        }
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
         // $host = 'http://localhost:4444/wd/hub';
