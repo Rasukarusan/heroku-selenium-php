@@ -29,7 +29,7 @@ class Main {
         // 検索結果画面のタイトルが 'セレニウムで自動操作 - Google 検索' になるまで10秒間待機する
         // 指定したタイトルにならずに10秒以上経ったら
         // 'Facebook\WebDriver\Exception\TimeOutException' がthrowされる
-        $driver->wait(10)->until(
+        $driver->wait(30)->until(
             WebDriverExpectedCondition::titleIs('セレニウムで自動操作 - Google 検索')
         );
 
