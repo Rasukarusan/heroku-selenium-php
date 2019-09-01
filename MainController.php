@@ -59,7 +59,7 @@ class Main {
         if(!empty(getenv('GOOGLE_CHROME_SHIM'))) {
             // herokuの場合
         }
-            putenv('webdriver.chrome.driver=/app/.chromedriver/bin/chromedriver');
+            putenv('webdriver.chrome.driver=/app/.apt/usr/bin/google-chrome');
             $options->setBinary(getenv('GOOGLE_CHROME_SHIM'));
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
