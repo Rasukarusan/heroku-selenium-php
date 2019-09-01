@@ -49,7 +49,7 @@ class Main {
     private function createDriver() {
 
         // Remote/Service/DriverService.phpで環境変数からchromedriverを取得しているため必要
-        putenv('webdriver.chrome.driver=/usr/local/bin/chromedriver');
+        // putenv('webdriver.chrome.driver=/usr/local/bin/chromedriver');
         $options = new ChromeOptions();
         $options->addArguments(array(
             '--headless',
