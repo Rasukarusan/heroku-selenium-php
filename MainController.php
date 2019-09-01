@@ -47,18 +47,24 @@ class Main {
 
 
     private function createDriver() {
+
+        // Remote/Service/DriverService.phpで環境変数からchromedriverを取得しているため必要
+        putenv('webdriver.chrome.driver=/usr/local/bin/chromedriver');
         $options = new ChromeOptions();
         $options->addArguments(array(
             '--headless',
             '--no-sandbox',
             '--disable-gpu',
         ));
-        $options->setBinary(getenv('GOOGLE_CHROME_SHIM'));
+        if(!empty(getenv('GOOGLE_CHROME_SHIM'))) {
+            // herokuの場合
+            putenv('webdriver.chrome.driver=/app/.chromedriver/bin/chromedriver');
+            $options->setBinary(getenv('GOOGLE_CHROME_SHIM'));
+        }
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
         // $host = 'http://localhost:4444/wd/hub';
         // $driver = RemoteWebDriver::create($host, $capabilities);
-        var_dump($capabilities);
         $driver = ChromeDriver::start($capabilities);
         $driver->manage()->window()->maximize();
         $driver->manage()->timeouts()->implicitlyWait(self::SELENIUM_TIMEOUT_SEC);
