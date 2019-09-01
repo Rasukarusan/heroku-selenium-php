@@ -4,6 +4,7 @@ require_once './vendor/autoload.php';
 
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Chrome\ChromeDriver;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\WebDriverBy;
@@ -48,14 +49,17 @@ class Main {
     private function createDriver() {
         $options = new ChromeOptions();
         $options->addArguments(array(
-            "--headless",
-            "--no-sandbox",
-            "--disable-gpu",
+            '--headless',
+            '--no-sandbox',
+            '--disable-gpu',
         ));
+        $options->setBinary(getenv('GOOGLE_CHROME_SHIM'));
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
-        $host = 'http://localhost:4444/wd/hub';
-        $driver = RemoteWebDriver::create($host, $capabilities);
+        // $host = 'http://localhost:4444/wd/hub';
+        // $driver = RemoteWebDriver::create($host, $capabilities);
+        var_dump($capabilities);
+        $driver = ChromeDriver::start($capabilities);
         $driver->manage()->window()->maximize();
         $driver->manage()->timeouts()->implicitlyWait(self::SELENIUM_TIMEOUT_SEC);
         $driver->manage()->timeouts()->pageLoadTimeout(self::SELENIUM_TIMEOUT_SEC);
