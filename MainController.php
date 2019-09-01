@@ -40,6 +40,7 @@ class Main {
         // キャプチャ
         $file = __DIR__ . '/sample_chrome.png';
         $driver->takeScreenshot($file);
+        echo '<img src="./sample_chrome.png">';
 
         // ブラウザを閉じる
         $driver->close();
